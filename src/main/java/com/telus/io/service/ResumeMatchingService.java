@@ -28,7 +28,7 @@ public interface ResumeMatchingService {
      * @param jobDescription The job description to match against
      * @return An explanation of the match
      */
-    String explainMatch(Resume resume, String jobDescription);
+   // String explainMatch(Resume resume, String jobDescription);
     
     /**
      * Asynchronously explain why a resume matches a job description.

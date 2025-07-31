@@ -17,54 +17,46 @@ import com.telus.io.dto.ChatRequest_user;
 import com.telus.io.dto.ChatResponse;
 import com.telus.io.service.ResumeAwareChatService;
 
-
-
 /**
  * Controller for chat-related endpoints.
  */
 @RestController
 @RequestMapping("/api/chat")
 public class ChatController {
-    
-    private static final Logger logger = LoggerFactory.getLogger(ChatController.class);
-    
-    private final ResumeAwareChatService chatService;
-    
-    public ChatController(ResumeAwareChatService chatService) {
-        this.chatService = chatService;
-    }
-    
-    
-    
-    
-    
-    
-    
-    @PostMapping("/message")
-    public ResponseEntity<ChatResponse> chatuser(
-            
-            @RequestBody ChatRequest_user request) {
-        
-        logger.info("Received chat message from user {}: {}", request.getCurrentResumeId(), request);
-        
-        ChatResponse chat_local = chatService.chat_local(request.getCurrentResumeId(), request.getMessage());
-        
-        return ResponseEntity.ok(chat_local);
-    }
-   
-    /**
-     * Get the chat history for a user.
-     * 
-     * @param userId The ID of the user
-     * @return A list of chat messages
-     */
-    @GetMapping("/{userId}/history")
-    public ResponseEntity<List<ChatMessage>> getChatHistory(@PathVariable String userId) {
-        logger.info("Retrieving chat history for user {}", userId);
-        
-        List<ChatMessage> history = chatService.getChatHistory(userId);
-        
-        return ResponseEntity.ok(history);
-    }
-   
+
+	private static final Logger logger = LoggerFactory.getLogger(ChatController.class);
+
+	private final ResumeAwareChatService chatService;
+
+	public ChatController(ResumeAwareChatService chatService) {
+		this.chatService = chatService;
+	}
+
+	@PostMapping("/message")
+	public ResponseEntity<ChatResponse> chatuser(
+
+			@RequestBody ChatRequest_user request) {
+
+		logger.info("Received chat message from user {}: {}", request.getCurrentResumeId(), request);
+
+		ChatResponse chat_local = chatService.chat_local(request.getCurrentResumeId(), request.getMessage());
+
+		return ResponseEntity.ok(chat_local);
+	}
+
+	/**
+	 * Get the chat history for a user.
+	 * 
+	 * @param userId The ID of the user
+	 * @return A list of chat messages
+	 */
+	@GetMapping("/{userId}/history")
+	public ResponseEntity<List<ChatMessage>> getChatHistory(@PathVariable String userId) {
+		logger.info("Retrieving chat history for user {}", userId);
+
+		List<ChatMessage> history = chatService.getChatHistory(userId);
+
+		return ResponseEntity.ok(history);
+	}
+
 }
