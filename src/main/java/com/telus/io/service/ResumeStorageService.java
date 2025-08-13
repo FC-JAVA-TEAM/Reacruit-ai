@@ -80,4 +80,6 @@ public interface ResumeStorageService {
      * @return The result of the synchronization
      */
     SyncResult synchronizeVectorStore();
+    
+    public void saveToVectorStore(Resume resume) ;
 }

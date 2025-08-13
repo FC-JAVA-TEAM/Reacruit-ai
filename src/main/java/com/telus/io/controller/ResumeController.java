@@ -70,6 +70,20 @@ public class ResumeController {
 		ResumeResponse response = new ResumeResponse(resume);
 
 		logger.info("Resume uploaded successfully: {}", resume.getId());
+		
+		if (response.getId() == null) {
+			logger.error("Resume upload failed, no ID returned");
+			return ResponseEntity.status(500).build();
+		}else {
+			logger.info("Resume uploaded successfully with ID: {}", response.getId());
+			
+			logger.info("saving to vectore: {}", response.getId());
+			// Save to vector store
+			storageService.saveToVectorStore(resume);
+			
+		}
+		
+		
 
 		return ResponseEntity.ok(response);
 	}

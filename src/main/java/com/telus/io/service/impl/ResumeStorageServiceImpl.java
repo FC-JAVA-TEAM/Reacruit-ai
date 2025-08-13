@@ -111,7 +111,7 @@ public class ResumeStorageServiceImpl implements ResumeStorageService {
      * 
      * @param resume The resume to save
      */
-    private void saveToVectorStore(Resume resume) {
+    public void saveToVectorStore(Resume resume) {
         try {
             // Create a more comprehensive metadata map
             Map<String, Object> metadata = new HashMap<>();
